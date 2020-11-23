@@ -10,4 +10,3 @@ app.config['FLASK_ENV'] = 'development'
 
 from app import views
 
-app.run(debug=True)
