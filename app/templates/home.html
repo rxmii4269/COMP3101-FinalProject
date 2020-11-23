@@ -16,9 +16,9 @@
       </button>
       <button
         class="list-group-item list-group-item-action btn-sm"
-        id="SJF-list"
+        id="SJN-list"
         data-toggle="list"
-        data-target="#SJF"
+        data-target="#SJN"
         role="tab"
         aria-controls="profile"
       >
@@ -49,106 +49,111 @@
 </div>
 
 <div class="mt-3 tab-content">
-  <table
-    class="fade show tab-pane active table table-hover table-bordered table-responsive"
+  <button type="button" class="btn btn-sm btn-success add-row">Add Row</button>
+  <button type="button" class="btn btn-sm btn-danger remove-row">
+    Remove Row
+  </button>
+  <div
+    class="fade tab-pane show active"
     id="FCFS"
     role="tabpanel"
     aria-labelledby="FCFS-list"
   >
-    <thead>
-      <tr>
-        <th scope="col">Process</th>
-        <th scope="col">Arrival Time</th>
-        <th scope="col">Execute Time</th>
-        <th scope="col">Service Time</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td scope="row">P0</td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td scope="row"></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-  <table
-    class="fade tab-pane table table-hover table-bordered table-responsive collapse"
-    id="SJF"
-    role="tabpanel"
-    aria-labelledby="SJF-list"
-  >
-    <thead>
-      <tr>
-        <th scope="col">Process</th>
-        <th scope="col">Arrival Time</th>
-        <th scope="col">Execute Time</th>
-        <th scope="col">Service Time</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td scope="row"></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td scope="row"></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-  <table
-    class="fade tab-pane table table-hover table-bordered table-responsive collapse"
-    id="PS"
-    role="tabpanel"
-    aria-labelledby="PS-list"
-  >
-    <thead>
-      <tr>
-        <th scope="col">Process</th>
-        <th scope="col">Arrival Time</th>
-        <th scope="col">Execute Time</th>
-        <th scope="col">Service Time</th>
-        <th scope="col">Priority</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td scope="row"></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td scope="row"></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
+    <table
+      class="table table-hover table-bordered table-responsive mt-3"
+      id="FCFS-table"
+    >
+      <thead>
+        <tr>
+          <th scope="col">Process</th>
+          <th scope="col">Arrival Time</th>
+          <th scope="col">Service Time</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td scope="row" id="start">P0</td>
+          <td>0</td>
+          <td>
+            <input
+              class="form-control p-0"
+              type="number"
+              name="arrivalTime"
+              id=""
+            />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <button class="btn btn-md btn-success">Visualize</button>
+  </div>
 
   <div
-    id="RR"
-    class="fade tab-pane collapse"
+    class="fade tab-pane"
+    id="SJN"
     role="tabpanel"
-    aria-labelledby="RR-list"
+    aria-labelledby="SJN-list"
   >
-    <table class="table table-hover table-bordered table-responsive">
+    <table
+      class="table table-hover table-bordered table-responsive mt-3"
+      id="SJN-table"
+    >
+      <thead>
+        <tr>
+          <th scope="col">Process</th>
+          <th scope="col">Arrival Time</th>
+          <th scope="col">Execute Time</th>
+          <th scope="col">Service Time</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td scope="row"></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td scope="row"></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="fade tab-pane" id="PS" role="tabpanel" aria-labelledby="PS-list">
+    <table class="table table-hover table-bordered table-responsive mt-3">
+      <thead>
+        <tr>
+          <th scope="col">Process</th>
+          <th scope="col">Arrival Time</th>
+          <th scope="col">Execute Time</th>
+          <th scope="col">Service Time</th>
+          <th scope="col">Priority</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td scope="row"></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td scope="row"></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div id="RR" class="fade tab-pane" role="tabpanel" aria-labelledby="RR-list">
+    <table class="table table-hover table-bordered table-responsive mt-3">
       <thead>
         <tr>
           <th scope="col">Process</th>
@@ -171,7 +176,7 @@
     </table>
     <label for="">
       Quantum
-      <input class="form-control" type="number" name="quantum" id="">
+      <input class="form-control" type="number" name="quantum" id="" />
     </label>
   </div>
 </div>

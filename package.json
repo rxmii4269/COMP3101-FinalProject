@@ -1,0 +1,13 @@
+{
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^7.14.0"
+  },
+  "name": "COMP3101-FinalProject",
+  "version": "1.0.0",
+  "main": "app.js",
+  "repository": "git@github.com:rxmii4269/COMP3101-FinalProject.git",
+  "author": "Romaine Murray <romaine.murray@mymona.uwi.edu>",
+  "license": "MIT",
+  "private": true
+}

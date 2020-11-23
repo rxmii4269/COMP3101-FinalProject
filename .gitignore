@@ -106,3 +106,5 @@ dist
 venv
 
 __pycache__
+
+app/__init__.pyc
