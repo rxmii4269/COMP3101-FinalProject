@@ -2,6 +2,8 @@
 
 let $currTableRow = $("#FCFS #start");
 let curValue = parseInt($currTableRow.text().split("")[1]);
+let $second_currTableRow = $("#SJN #second_start");
+let second_currValue = parseInt($second_currTableRow[0].textContent.trim().split("")[1]);
 $(".add-row").click(function () {
   if ($("#FCFS").is(".active")) {
     let val = curValue + 1;
@@ -12,9 +14,22 @@ $(".add-row").click(function () {
               </tr>`;
     $("#FCFS-table").append(row);
     curValue = val;
-  } else if ($("#SJN").is(".active")) {
-    console.log($("#SJN-table"));
+    return
   }
+
+  if ($("#SJN").is(".active")) {
+        let sec_val = second_currValue + 1;
+        let sec_row = `<tr class="P${sec_val}">
+                  <td>P${sec_val}</td>
+                  <td><input class="form-control p-0" type="number" value="${sec_val}"></td>
+                  <td><input class="form-control p-0" type="number"></td>
+                  <td><input class="form-control p-0" type="number"></td>
+              </tr>`;
+        $("#SJN-table").append(sec_row);
+        second_currValue = sec_val;
+        console.log("this works")
+        return
+    }
 });
 
 $(".remove-row").click(function () {
@@ -30,6 +45,7 @@ $(".remove-row").click(function () {
   }
 });
 
+
 let ctx = $("#visualization"); 
 
 $("#FCFS-btn").click(function () {
@@ -37,7 +53,16 @@ $("#FCFS-btn").click(function () {
         $(this).each(function(){
             
             console.log($("input[type='number']").val());
-        })
+        });
+    });
+});
+
+
+$("#SJN-btn").click(function (){
+    $("#SJN-table tbody tr").each(function(){
+        $(this).each(function(){
+            console.log($("input[type = 'number']").val());
+        });
     });
 });
 

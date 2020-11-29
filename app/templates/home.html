@@ -10,8 +10,7 @@
         data-toggle="list"
         data-target="#FCFS"
         role="tab"
-        aria-controls="home"
-      >
+        aria-controls="home">
         First Come First Served
       </button>
       <button
@@ -109,24 +108,22 @@
       </thead>
       <tbody>
         <tr>
-          <td scope="row"></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td scope="row"></td>
-          <td></td>
-          <td></td>
-          <td></td>
+          <td scope="row" id="second_start" class="P0"> P0 </td>
+         <td>0</td>
+           <td>
+            <input class="form-control p-0" type="number" name="arrivalTime" min="0"/>
+          </td>
+           <td>
+            <input class="form-control p-0" type="number" name="executionTime" min="0"/>
+          </td>
         </tr>
       </tbody>
     </table>
+    <button id="SJN-btn" class="btn btn-md btn-success">Visualize</button>
   </div>
 
   <div class="fade tab-pane" id="PS" role="tabpanel" aria-labelledby="PS-list">
-    <table class="table table-hover table-bordered table-responsive mt-3">
-      <thead>
+    <table class="table table-hover table-bordered table-responsive mt-3" id="PS-table">
         <tr>
           <th scope="col">Process</th>
           <th scope="col">Arrival Time</th>
