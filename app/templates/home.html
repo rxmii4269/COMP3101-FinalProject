@@ -68,25 +68,23 @@
         <tr>
           <th scope="col">Process</th>
           <th scope="col">Arrival Time</th>
-          <th scope="col">Execute Time</th>
           <th scope="col">Service Time</th>
         </tr>
       </thead>
       <tbody>
         <tr class="P0">
           <td scope="row" id="start">P0</td>
-          <td>0</td>
+          <td><input type="number" class="form-control p-0" name="arrivalTime" id="arrTime0" value="0"></td>
           <td>
             <input
-              id="execute0"
+              id="service0"
               class="form-control p-0"
               type="number"
-              name="arrivalTime"
+              name="serviceTime"
               min="0"
-              value="0"
+              value="3"
             />
           </td>
-          <td id="service0">0</td>
         </tr>
       </tbody>
     </table>
