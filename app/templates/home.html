@@ -53,6 +53,7 @@
   <button type="button" class="btn btn-sm btn-danger remove-row">
     Remove Row
   </button>
+
   <div
     class="fade tab-pane show active"
     id="FCFS"
@@ -72,20 +73,20 @@
       </thead>
       <tbody>
         <tr>
-          <td scope="row" id="start">P0</td>
+          <td scope="row" id="start" class="P0">P0</td>
           <td>0</td>
           <td>
             <input
               class="form-control p-0"
               type="number"
               name="arrivalTime"
-              id=""
+              min="0"
             />
           </td>
         </tr>
       </tbody>
     </table>
-    <button class="btn btn-md btn-success">Visualize</button>
+    <button id="FCFS-btn" class="btn btn-md btn-success">Visualize</button>
   </div>
 
   <div
@@ -179,6 +180,10 @@
       <input class="form-control" type="number" name="quantum" id="" />
     </label>
   </div>
+</div>
+<div class="chart-container mt-2" style="position: relative; height: 40vh; width: 80vw;">
+
+  <canvas id="visualization" width="200" height="100"></canvas>
 </div>
 
 {%endblock%}
