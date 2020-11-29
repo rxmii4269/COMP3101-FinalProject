@@ -124,6 +124,7 @@
 
   <div class="fade tab-pane" id="PS" role="tabpanel" aria-labelledby="PS-list">
     <table class="table table-hover table-bordered table-responsive mt-3" id="PS-table">
+      <thead>
         <tr>
           <th scope="col">Process</th>
           <th scope="col">Arrival Time</th>
@@ -134,24 +135,24 @@
       </thead>
       <tbody>
         <tr>
-          <td scope="row"></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td scope="row"></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+          <tr>
+          <td scope="row" id="third_start" class="P0"> P0 </td>
+         <td>0</td>
+           <td>
+            <input class="form-control p-0" type="number" name="arrivalTime" min="0"/>
+          </td>
+           <td>
+            <input class="form-control p-0" type="number" name="executionTime" min="0"/>
+          </td>
+           <td>
+            <input class="form-control p-0" type="number" name="priority" min="0"/>
+          </td>
         </tr>
       </tbody>
     </table>
   </div>
   <div id="RR" class="fade tab-pane" role="tabpanel" aria-labelledby="RR-list">
-    <table class="table table-hover table-bordered table-responsive mt-3">
+    <table class="table table-hover table-bordered table-responsive mt-3" id="RR-table">
       <thead>
         <tr>
           <th scope="col">Process</th>
@@ -160,16 +161,11 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td scope="row"></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td scope="row"></td>
-          <td></td>
-          <td></td>
-        </tr>
+        <td scope="row" id="fourth_start" class="P0"> P0 </td>
+         <td>0</td>
+           <td>
+            <input class="form-control p-0" type="number" name="arrivalTime" min="0"/>
+          </td>
       </tbody>
     </table>
     <label for="">

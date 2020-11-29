@@ -1,9 +1,13 @@
 "use strict";
 
 var $currTableRow = $("#FCFS #start");
-var curValue = parseInt($currTableRow.text().split("")[1]);
+var curValue = parseInt($currTableRow[0].textContent.trim().split("")[1]);
 var $second_currTableRow = $("#SJN #second_start");
 var second_currValue = parseInt($second_currTableRow[0].textContent.trim().split("")[1]);
+var $third_currTableRow = $("#PS #third_start");
+var third_currValue = parseInt($third_currTableRow[0].textContent.trim().split("")[1]);
+var $fourth_currTableRow = $("#RR #fourth_start");
+var fourth_currValue = parseInt($fourth_currTableRow[0].textContent.trim().split("")[1]);
 $(".add-row").click(function () {
   if ($("#FCFS").is(".active")) {
     let val = curValue + 1;
@@ -30,6 +34,34 @@ $(".add-row").click(function () {
         console.log("this works")
         return
     }
+
+  if ($("#PS").is(".active")) {
+        let third_val = third_currValue + 1;
+        let third_row = `<tr class="P${third_val}">
+                  <td>P${third_val}</td>
+                  <td><input class="form-control p-0" type="number" value="${third_val}"></td>
+                  <td><input class="form-control p-0" type="number"></td>
+                  <td><input class="form-control p-0" type="number"></td>
+                  <td><input class="form-control p-0" type="number"></td>
+              </tr>`;
+        $("#PS-table").append(third_row);
+        third_currValue =  third_val;
+        console.log("this works")
+        return
+   }
+
+  if ($("#RR").is(".active")) {
+    let fourth_val = fourth_currValue + 1;
+    let fourth_row = `<tr class="P${fourth_val}">
+                  <td>P${fourth_val}</td>
+                  <td><input class="form-control p-0" type="number" value="${fourth_val}"></td>
+                  <td><input class="form-control p-0" type="number"></td>
+              </tr>`;
+    $("#RR-table").append(fourth_row);
+    fourth_currValue = fourth_val;
+    return
+  }
+
 });
 
 $(".remove-row").click(function () {
@@ -42,12 +74,34 @@ $(".remove-row").click(function () {
       return
     }
   }
+
   if ($("#SJN").is(".active")) {
     let SJNTableRows = $("#SJN-table tr");
 
     if (SJNTableRows.length > 2) {
       SJNTableRows.last().remove();
       second_currValue -= 1
+    return
+    }
+   }
+
+  if ($("#PS").is(".active")) {
+    let PSTableRows = $("#PS-table tr");
+
+    if (PSTableRows.length > 2) {
+      PSTableRows.last().remove();
+      third_currValue -= 1
+    return
+    }
+    console.log("works");
+  }
+
+  if ($("#RR").is(".active")) {
+    let RRTableRows = $("#RR-table tr");
+
+    if (RRTableRows.length > 2) {
+      RRTableRows.last().remove();
+      fourth_currValue -= 1
     return
     }
     console.log("works");
