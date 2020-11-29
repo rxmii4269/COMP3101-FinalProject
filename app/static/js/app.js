@@ -1,9 +1,9 @@
 "use strict";
 
-let $currTableRow = $("#FCFS #start");
-let curValue = parseInt($currTableRow.text().split("")[1]);
-let $second_currTableRow = $("#SJN #second_start");
-let second_currValue = parseInt($second_currTableRow[0].textContent.trim().split("")[1]);
+var $currTableRow = $("#FCFS #start");
+var curValue = parseInt($currTableRow.text().split("")[1]);
+var $second_currTableRow = $("#SJN #second_start");
+var second_currValue = parseInt($second_currTableRow[0].textContent.trim().split("")[1]);
 $(".add-row").click(function () {
   if ($("#FCFS").is(".active")) {
     let val = curValue + 1;
@@ -38,9 +38,18 @@ $(".remove-row").click(function () {
 
     if (FCFSTableRows.length > 2) {
       FCFSTableRows.last().remove();
-
+      curValue -= 1
+      return
     }
-  } else if ($("#SJN").is(".active")) {
+  }
+  if ($("#SJN").is(".active")) {
+    let SJNTableRows = $("#SJN-table tr");
+
+    if (SJNTableRows.length > 2) {
+      SJNTableRows.last().remove();
+      second_currValue -= 1
+    return
+    }
     console.log("works");
   }
 });
