@@ -27,7 +27,6 @@ $(".add-row").click(function () {
                   <td>P${sec_val}</td>
                   <td><input class="form-control p-0" type="number" value="${sec_val}"></td>
                   <td><input class="form-control p-0" type="number"></td>
-                  <td><input class="form-control p-0" type="number"></td>
               </tr>`;
         $("#SJN-table").append(sec_row);
         second_currValue = sec_val;
@@ -127,111 +126,109 @@ $("#SJN-btn").click(function (){
             console.log($("input[type = 'number']").val());
         });
     });
+
+
 });
+
+function FCFS(readyQueue) {
+  readyQueue.sort((a, b) => a[1] - b[1]);
+  addFCFSData(myChart, readyQueue);
+}
+
+
+function groupByThree([a, b, c, ...rest]) {
+  if (rest.length === 0) return [[a, b, c].filter((x) => x !== undefined)];
+  return [[a, b, c]].concat(groupByThree(rest));
+}
+
+function addSJNData(chart, data) {
+  let x_start = 0;
+  let x_end = 0;
+  data.forEach((info, index) => {
+    x_end = index == 0 ? info[2] : parseInt(info[2]) + parseInt(x_start);
+
+    let chartData = {
+      label: info[0],
+      backgroundColor: `rgba${Math.floor(Math.random() * 255)},${Math.floor(
+        Math.random() * 255
+      )},${Math.floor(Math.random() * 255)},1)`,
+      borderColor: `rgba(${Math.floor(Math.random() * 255)},${Math.floor(
+        Math.random() * 255
+      )},${Math.floor(Math.random() * 255)},1)`,
+      fill: false,
+      borderWidth: 15,
+      pointRadius: 0,
+      data: [
+        {
+          x: x_start,
+          y: 15 - index - 1,
+        },
+        {
+          x: x_end,
+          y: 15 - index - 1,
+        },
+      ],
+    };
+    x_start = x_end;
+    chart.data.datasets.push(chartData);
+    chart.update();
+  });
+
+}
+
 
 // eslint-disable-next-line no-undef
 var myChart = new Chart(ctx, {
-  type: 'line',
+  type: "line",
   data: {
-      datasets: [
-      {
-
-          label: 'Scatter Dataset',
-          backgroundColor: "rgba(246,156,85,1)",
-          borderColor: "rgba(246,156,85,1)",
-          fill: false,
-          borderWidth : 15,
-          pointRadius : 0,
-          data: [
-              {
-                  x: 0,
-                  y: 9
-              }, {
-                  x: 9,
-                  y: 9
-              }
-          ]
-      },
-      {
-          backgroundColor: "rgba(208,255,154,1)",
-          borderColor: "rgba(208,255,154,1)",
-          fill: false,
-          borderWidth : 15,
-          pointRadius : 0,
-          data: [
-              {
-                  x: 3,
-                  y: 7
-              }, {
-                  x: 5,
-                  y: 7
-              }
-          ]
-      },
-      {
-
-          label: 'Scatter Dataset',
-          backgroundColor: "rgba(246,156,85,1)",
-          borderColor: "rgba(246,156,85,1)",
-          fill: false,
-          borderWidth : 15,
-          pointRadius : 0,
-          data: [
-              {
-                  x: 5,
-                  y: 5
-              }, {
-                  x: 10,
-                  y: 5
-              }
-          ]
-      },
-      {
-          backgroundColor: "rgba(208,255,154,1)",
-          borderColor: "rgba(208,255,154,1)",
-          fill: false,
-          borderWidth : 15,
-          pointRadius : 0,
-          data: [
-              {
-                  x: 10,
-                  y: 3
-              }, {
-                  x: 13,
-                  y: 3
-              }
-          ]
-      }
-      ]
+    datasets: [],
   },
   options: {
-      legend : {
-          display : true
+    animation: {
+        easing:"easeInElastic"
+    },
+    title: {
+      display: true,
+      text: "Shortest Job Next (SJN) Visualization",
+      fontFamily: `system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"`,
+      fontSize: 16,
+    },
+    legend: {
+      display: true,
+      labels: {
+        padding: 30,
+        fontFamily: `system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"`,
+        fontSize: 16,
       },
-      scales: {
-          xAxes: [{
-              type: 'linear',
-              position: 'bottom',
-              ticks : {
-                  beginAtzero :true,
-                  stepSize : 1
-              }
-          }],
-          yAxes : [{
-              scaleLabel : {
-                  display : true
-              },
-              ticks : {
-                  beginAtZero :true,
-                  max : 10
-              }
-          }]
-      }
+    },
+    scales: {
+      xAxes: [
+        {
+          type: "linear",
+          position: "bottom",
+          ticks: {
+            beginAtzero: true,
+            stepSize: 1,
+          },
+          scaleLabel:{
+            display: true,
+            labelString: "Total Service Time Taken",
+            fontSize: 16,
+        },
+        },
+      ],
+      yAxes: [
+        {
+          scaleLabel: {
+            display: true,
+          },
+          ticks: {
+            beginAtZero: true,
+            max: 15,
+            stepSize: 1,
+          },
+        },
+      ],
+    },
   },
 });
-
-
-
-function FCFS(readyQueue) {
-
-}
