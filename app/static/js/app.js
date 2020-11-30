@@ -44,7 +44,7 @@ $("#PS-btn").click(function () {
       readyQueue.push(value.innerText);
     }
   });
-    findNextIndexWithPriority(PS(groupByFour(readyQueue))) ;
+    findNextIndexWithPriority(PS(groupByThree(readyQueue))) ;
 });
 
 
@@ -143,9 +143,9 @@ function PS(readyQueue) {
   addPSData(myChart, readyQueue);
 }
 
-function groupByFour([a, b, c, d,...rest]) {
-  if (rest.length === 0) return [[a, b, c, d].filter((x) => x !== undefined)];
-  return [[a, b, c, d]].concat(groupByFour(rest));
+function groupByThree([a, b, c,,...rest]) {
+  if (rest.length === 0) return [[a, b, c].filter((x) => x !== undefined)];
+  return [[a, b, c]].concat(groupByThree(rest));
 }
 
 function addPSData(chart, data) {
