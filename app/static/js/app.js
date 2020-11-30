@@ -121,18 +121,20 @@ $("#FCFS-btn").click(function () {
 
 
 $("#SJN-btn").click(function (){
-    $("#SJN-table tbody tr").each(function(){
-        $(this).each(function(){
-            console.log($("input[type = 'number']").val());
-        });
+    let new_que = [];
+    $("#SJN-table tbody tr td").each(function(index, value){
+       if ($(value).find(".form-control").length){
+            new_que.push($(value).find(".form-control").val());
+       } else{
+        new_que.push(value.innerText);
+        }
     });
-
-
+        SJN(groupByThree(new_que));
 });
 
-function FCFS(readyQueue) {
+function SJN(readyQueue) {
   readyQueue.sort((a, b) => a[1] - b[1]);
-  addFCFSData(myChart, readyQueue);
+  addSJNData(myChart, readyQueue);
 }
 
 
