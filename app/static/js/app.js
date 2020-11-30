@@ -100,7 +100,7 @@ var myChart = new Chart(ctx, {
   },
   options: {
     animation: {
-        easing:"easeInElastic"
+        easing:"linear"
     },  
     title: {
       display: true,
