@@ -112,13 +112,16 @@ $(".remove-row").click(function () {
 let ctx = $("#visualization"); 
 
 $("#FCFS-btn").click(function () {
-    $("#FCFS-table tbody tr").each(function(){
-        $(this).each(function(){
-            
-            console.log($("input[type='number']").val());
-        });
+    let readyQueue = [];
+    $("#FCFS-table tbody tr td").each(function (index, value) {
+      if ($(value).find(".form-control").length) {
+        readyQueue.push($(value).find(".form-control").val());
+      } else {
+        readyQueue.push(value.innerText);
+      }
     });
-});
+    FCFS(groupByThree(readyQueue));
+  });
 
 
 $("#SJN-btn").click(function (){
@@ -129,6 +132,72 @@ $("#SJN-btn").click(function (){
     });
 });
 
+
+$("#PS-btn").click(function (){
+    let process=[];
+    $("#PS-table tbody tr").each(function(){
+        $(this).each(function(){
+            console.log($("input[type = 'number']").val());
+        });
+    });
+});
+
+$("#RR-btn").click(function (){
+    
+    $("#PS-table tbody tr").each(function(){
+        $(this).each(function(){
+            console.log($("input[type = 'number']").val());
+        });
+    });
+});
+
+function findOrder(process){
+
+}
+
+function FCFS(readyQueue) {
+    readyQueue.sort((a, b) => a[1] - b[1]);
+    addFCFSData(myChart, readyQueue);
+  }
+  
+  function groupByThree([a, b, c, ...rest]) {
+    if (rest.length === 0) return [[a, b, c].filter((x) => x !== undefined)];
+    return [[a, b, c]].concat(groupByThree(rest));
+  }
+  
+  function addFCFSData(chart, data) {
+    let x_start = 0;
+    let x_end = 0;
+    data.forEach((info, index) => {
+      x_end = index == 0 ? info[2] : parseInt(info[2]) + parseInt(x_start);
+  
+      let chartData = {
+        label: info[0],
+        backgroundColor: `rgba${Math.floor(Math.random() * 255)},${Math.floor(
+          Math.random() * 255
+        )},${Math.floor(Math.random() * 255)},1)`,
+        borderColor: `rgba(${Math.floor(Math.random() * 255)},${Math.floor(
+          Math.random() * 255
+        )},${Math.floor(Math.random() * 255)},1)`,
+        fill: false,
+        borderWidth: 15,
+        pointRadius: 0,
+        data: [
+          {
+            x: x_start,
+            y: 15 - index - 1,
+          },
+          {
+            x: x_end,
+            y: 15 - index - 1,
+          },
+        ],
+      };
+      x_start = x_end;
+      chart.data.datasets.push(chartData);
+    });
+    chart.update();
+  }
 // eslint-disable-next-line no-undef
 var myChart = new Chart(ctx, {
   type: 'line',
@@ -231,7 +300,3 @@ var myChart = new Chart(ctx, {
 });
 
 
-
-function FCFS(readyQueue) {
-
-}
