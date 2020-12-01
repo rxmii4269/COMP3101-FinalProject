@@ -10,8 +10,7 @@
         data-toggle="list"
         data-target="#FCFS"
         role="tab"
-        aria-controls="home"
-      >
+        aria-controls="home">
         First Come First Served
       </button>
       <button
@@ -26,7 +25,7 @@
       </button>
       <button
         class="list-group-item list-group-item-action btn-sm"
-        id="list-messages-list"
+        id="PS-list"
         data-toggle="list"
         data-target="#PS"
         role="tab"
@@ -36,7 +35,7 @@
       </button>
       <button
         class="list-group-item list-group-item-action btn-sm"
-        id="list-settings-list"
+        id="RR-list"
         data-toggle="list"
         data-target="#RR"
         role="tab"
@@ -105,29 +104,24 @@
         <tr>
           <th scope="col">Process</th>
           <th scope="col">Arrival Time</th>
-          <th scope="col">Execute Time</th>
           <th scope="col">Service Time</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td scope="row"></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td scope="row"></td>
-          <td></td>
-          <td></td>
-          <td></td>
+          <td scope="row" id="second_start" class="P0"> P0 </td>
+         <td> <input class="form-control p-0" type="number" name="arrivalTime" min="0" value="0"/> </td>
+           <td>
+            <input class="form-control p-0" type="number" name="executionTime" min="0"/>
+          </td>
         </tr>
       </tbody>
     </table>
+    <button id="SJN-btn" class="btn btn-md btn-success">Visualize</button>
   </div>
 
   <div class="fade tab-pane" id="PS" role="tabpanel" aria-labelledby="PS-list">
-    <table class="table table-hover table-bordered table-responsive mt-3">
+    <table class="table table-hover table-bordered table-responsive mt-3" id="PS-table">
       <thead>
         <tr>
           <th scope="col">Process</th>
@@ -139,24 +133,25 @@
       </thead>
       <tbody>
         <tr>
-          <td scope="row"></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td scope="row"></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+          <tr>
+          <td scope="row" id="third_start" class="P0"> P0 </td>
+         <td>0</td>
+           <td>
+            <input class="form-control p-0" type="number" name="arrivalTime" min="0"/>
+          </td>
+           <td>
+            <input class="form-control p-0" type="number" name="executionTime" min="0"/>
+          </td>
+           <td>
+            <input class="form-control p-0" type="number" name="priority" min="0"/>
+          </td>
         </tr>
       </tbody>
     </table>
+    <button id="PS-btn" class="btn btn-md btn-success">Visualize</button>
   </div>
   <div id="RR" class="fade tab-pane" role="tabpanel" aria-labelledby="RR-list">
-    <table class="table table-hover table-bordered table-responsive mt-3">
+    <table class="table table-hover table-bordered table-responsive mt-3" id="RR-table">
       <thead>
         <tr>
           <th scope="col">Process</th>
@@ -165,22 +160,18 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td scope="row"></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td scope="row"></td>
-          <td></td>
-          <td></td>
-        </tr>
+        <td scope="row" id="fourth_start" class="P0"> P0 </td>
+         <td>0</td>
+           <td>
+            <input class="form-control p-0" type="number" name="arrivalTime" min="0"/>
+          </td>
       </tbody>
     </table>
     <label for="">
       Quantum
       <input class="form-control" type="number" name="quantum" id="" />
     </label>
+    <button id="RR-btn" class="btn btn-md btn-success">Visualize</button>
   </div>
 </div>
 <div class="chart-container mt-2" style="position: relative; height: 40vh; width: 80vw;">
