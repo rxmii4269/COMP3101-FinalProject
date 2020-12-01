@@ -143,7 +143,7 @@ $("#FCFS-btn").click(function () {
 });
 function FCFS(readyQueue) {
   readyQueue.sort((a, b) => a[1] - b[1]);
-  addFCFSData(myChart, readyQueue);
+  replaceChartData(myChart, readyQueue);
 }
 
 function groupByThree([a, b, c, ...rest]) {
@@ -151,7 +151,7 @@ function groupByThree([a, b, c, ...rest]) {
   return [[a, b, c]].concat(groupByThree(rest));
 }
 
-function addFCFSData(chart, data) {
+function replaceChartData(chart, data) {
   let x_start = 0;
   let x_end = 0;
   data.forEach((info, index) => {
@@ -199,7 +199,7 @@ $("#SJN-btn").click(function (){
 function SJN(readyQueue) {
   readyQueue.sort((a, b) => a[1] - b[1]);
   readyQueue = performSJN(readyQueue)
-  addSJNData(myChart, readyQueue);
+  replaceChartData(myChart, readyQueue);
 }
 function performSJN(data) {
   let current_time = 0; //shows the current time in the system
@@ -226,39 +226,6 @@ function performSJN(data) {
 
   return resulting_queue;
 }
-
-function addSJNData(chart, data) {
-  let x_start = 0;
-  let x_end = 0;
-  data.forEach((info, index) => {
-    x_end = index == 0 ? info[2] : parseInt(info[2]) + parseInt(x_start);
-
-    let chartData = {
-      label: info[0],
-      backgroundColor: `rgba${Math.floor(Math.random() * 255)},${Math.floor(
-        Math.random() * 255
-      )},${Math.floor(Math.random() * 255)},1)`,
-      borderColor: `rgba(${Math.floor(Math.random() * 255)},${Math.floor(
-        Math.random() * 255
-      )},${Math.floor(Math.random() * 255)},1)`,
-      fill: false,
-      borderWidth: 15,
-      pointRadius: 0,
-      data: [
-        {
-          x: x_start,
-          y: 15 - index - 1,
-        },
-        {
-          x: x_end,
-          y: 15 - index - 1,
-        },
-      ],
-    };
-    x_start = x_end;
-    chart.data.datasets.push(chartData);
-    chart.update();
-  });
 
 // eslint-disable-next-line no-undef
 var myChart = new Chart(ctx, {
