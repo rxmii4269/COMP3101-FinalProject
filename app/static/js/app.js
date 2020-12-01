@@ -8,6 +8,27 @@ var $third_currTableRow = $("#PS #third_start");
 var third_currValue = parseInt($third_currTableRow[0].textContent.trim().split("")[1]);
 var $fourth_currTableRow = $("#RR #fourth_start");
 var fourth_currValue = parseInt($fourth_currTableRow[0].textContent.trim().split("")[1]);
+
+$("#SJN-list").click(() => {
+    myChart.options.title.text = "Shortest Job Next (SJN) Visualization"
+    myChart.update();
+});
+
+$("#FCFS-list").click(() => {
+    myChart.options.title.text = "First Come First Served (FCFS) Visualization";
+    myChart.update();
+});
+
+$("#PS-list").click(() => {
+    myChart.options.title.text = "Priority Scheduling (PS) Visualization";
+    myChart.update();
+});
+
+$("#RR-list").click(() => {
+    myChart.options.title.text = "Round Robin (RR) Visualization";
+    myChart.update();
+});
+
 $(".add-row").click(function () {
   if ($("#FCFS").is(".active")) {
     let val = curValue + 1;
