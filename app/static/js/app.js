@@ -154,6 +154,7 @@ function groupByThree([a, b, c, ...rest]) {
 function replaceChartData(chart, data) {
   let x_start = 0;
   let x_end = 0;
+  chart.data.datasets = [];
   data.forEach((info, index) => {
     x_end = index == 0 ? info[2] : parseInt(info[2]) + parseInt(x_start);
 
