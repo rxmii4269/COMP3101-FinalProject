@@ -239,7 +239,7 @@ var myChart = new Chart(ctx, {
     },
     title: {
       display: true,
-      text: "Shortest Job Next (SJN) Visualization",
+      text: "First Come First Served (FCFS) Visualization",
       fontFamily: `system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"`,
       fontSize: 16,
     },
