@@ -34,8 +34,8 @@ $(".add-row").click(function () {
     let val = curValue + 1;
     let row = `<tr class="P${val}"> 
                   <td>P${val}</td>
-                  <td><input class="form-control p-0" type="number" value="${val}"></td>
-                  <td><input class="form-control p-0" type="number"></td> 
+                  <td><input type="number" class="form-control p-0" name="arrivalTime" id="arrTime${val}" min="0" value="${val}"></td> 
+                  <td><input id="service${val}" class="form-control p-0" type="number" value="${val}" min="0"></td>
               </tr>`;
     $("#FCFS-table").append(row);
     curValue = val;
@@ -128,19 +128,62 @@ $(".remove-row").click(function () {
   }
 });
 
-
-let ctx = $("#visualization"); 
+let ctx = $("#visualization");
 
 $("#FCFS-btn").click(function () {
-    $("#FCFS-table tbody tr").each(function(){
-        $(this).each(function(){
-            
-            console.log($("input[type='number']").val());
-        });
-    });
+  let readyQueue = [];
+  $("#FCFS-table tbody tr td").each(function (index, value) {
+    if ($(value).find(".form-control").length) {
+      readyQueue.push($(value).find(".form-control").val());
+    } else {
+      readyQueue.push(value.innerText);
+    }
+  });
+  FCFS(groupByThree(readyQueue));
 });
+function FCFS(readyQueue) {
+  readyQueue.sort((a, b) => a[1] - b[1]);
+  addFCFSData(myChart, readyQueue);
+}
 
+function groupByThree([a, b, c, ...rest]) {
+  if (rest.length === 0) return [[a, b, c].filter((x) => x !== undefined)];
+  return [[a, b, c]].concat(groupByThree(rest));
+}
 
+function addFCFSData(chart, data) {
+  let x_start = 0;
+  let x_end = 0;
+  data.forEach((info, index) => {
+    x_end = index == 0 ? info[2] : parseInt(info[2]) + parseInt(x_start);
+
+    let chartData = {
+      label: info[0],
+      backgroundColor: `rgba${Math.floor(Math.random() * 255)},${Math.floor(
+        Math.random() * 255
+      )},${Math.floor(Math.random() * 255)},1)`,
+      borderColor: `rgba(${Math.floor(Math.random() * 255)},${Math.floor(
+        Math.random() * 255
+      )},${Math.floor(Math.random() * 255)},1)`,
+      fill: false,
+      borderWidth: 15,
+      pointRadius: 0,
+      data: [
+        {
+          x: x_start,
+          y: 15 - index - 1,
+        },
+        {
+          x: x_end,
+          y: 15 - index - 1,
+        },
+      ],
+    };
+    x_start = x_end;
+    chart.data.datasets.push(chartData);
+  });
+  chart.update();
+}
 $("#SJN-btn").click(function (){
     let new_que = [];
     $("#SJN-table tbody tr td").each(function(index, value){
@@ -158,13 +201,6 @@ function SJN(readyQueue) {
   readyQueue = performSJN(readyQueue)
   addSJNData(myChart, readyQueue);
 }
-
-
-function groupByThree([a, b, c, ...rest]) {
-  if (rest.length === 0) return [[a, b, c].filter((x) => x !== undefined)];
-  return [[a, b, c]].concat(groupByThree(rest));
-}
-
 function performSJN(data) {
   let current_time = 0; //shows the current time in the system
   let waiting_queue = []; //shows the number of items needed to be added to the resulting queue which would be then added to the chart
@@ -224,9 +260,6 @@ function addSJNData(chart, data) {
     chart.update();
   });
 
-}
-
-
 // eslint-disable-next-line no-undef
 var myChart = new Chart(ctx, {
   type: "line",
@@ -235,8 +268,8 @@ var myChart = new Chart(ctx, {
   },
   options: {
     animation: {
-        easing:"easeInElastic"
-    },
+        easing:"linear"
+    },  
     title: {
       display: true,
       text: "First Come First Served (FCFS) Visualization",
@@ -262,7 +295,8 @@ var myChart = new Chart(ctx, {
           },
           scaleLabel:{
             display: true,
-            labelString: "Total Service Time Taken",
+            labelString: "Total CPU Cycles taken"
+
             fontSize: 16,
         },
         },
@@ -282,3 +316,9 @@ var myChart = new Chart(ctx, {
     },
   },
 });
+
+
+
+function FCFS(readyQueue) {
+
+}
