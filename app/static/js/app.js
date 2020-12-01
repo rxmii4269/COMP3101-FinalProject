@@ -262,10 +262,9 @@ var myChart = new Chart(ctx, {
           },
           scaleLabel:{
             display: true,
-            labelString: "Total CPU Cycles taken"
-
+            labelString: "Total CPU Cycles taken",
             fontSize: 16,
-        },
+          },
         },
       ],
       yAxes: [
