@@ -155,6 +155,7 @@ $("#SJN-btn").click(function (){
 
 function SJN(readyQueue) {
   readyQueue.sort((a, b) => a[1] - b[1]);
+  readyQueue = performSJN(readyQueue)
   addSJNData(myChart, readyQueue);
 }
 
@@ -162,6 +163,32 @@ function SJN(readyQueue) {
 function groupByThree([a, b, c, ...rest]) {
   if (rest.length === 0) return [[a, b, c].filter((x) => x !== undefined)];
   return [[a, b, c]].concat(groupByThree(rest));
+}
+
+function performSJN(data) {
+  let current_time = 0; //shows the current time in the system
+  let waiting_queue = []; //shows the number of items needed to be added to the resulting queue which would be then added to the chart
+  let resulting_queue = []; // shows the resulting queue which would be then added to the chart
+
+  function arrayIsEmpty(arr){
+    return arr.length === undefined || arr.length === 0;
+  }
+
+  while (!arrayIsEmpty(data)) {
+    waiting_queue.push(...data.filter( el => el[1] <= current_time));
+    data =  data.filter(el => el[1] > current_time);
+    waiting_queue.sort((el1, el2) => el1[2]-el2[2]);
+
+    if (arrayIsEmpty(data)) {
+        resulting_queue.push(...waiting_queue);
+    }else{
+        resulting_queue.push(waiting_queue[0]);
+        current_time += parseInt(waiting_queue[0][2]);
+        waiting_queue = waiting_queue.filter(el => el[0]===waiting_queue[0]);
+    }
+  }
+
+  return resulting_queue;
 }
 
 function addSJNData(chart, data) {
