@@ -282,9 +282,3 @@ var myChart = new Chart(ctx, {
     },
   },
 });
-
-
-
-function FCFS(readyQueue) {
-
-}
