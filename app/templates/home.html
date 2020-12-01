@@ -126,21 +126,18 @@
         <tr>
           <th scope="col">Process</th>
           <th scope="col">Arrival Time</th>
-          <th scope="col">Execute Time</th>
           <th scope="col">Service Time</th>
           <th scope="col">Priority</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <tr>
           <td scope="row" id="third_start" class="P0"> P0 </td>
-         <td>0</td>
-           <td>
-            <input class="form-control p-0" type="number" name="arrivalTime" min="0"/>
+         <td>
+           <input type="number" class="form-control p-0" name="Process" value="0"/>
           </td>
            <td>
-            <input class="form-control p-0" type="number" name="executionTime" min="0"/>
+            <input class="form-control p-0" type="number" name="arrivalTime" min="0"/>
           </td>
            <td>
             <input class="form-control p-0" type="number" name="priority" min="0"/>
@@ -161,7 +158,9 @@
       </thead>
       <tbody>
         <td scope="row" id="fourth_start" class="P0"> P0 </td>
-         <td>0</td>
+         <td>
+           <input type="number" class="form-control p-0" name="process" value="0">
+         </td>
            <td>
             <input class="form-control p-0" type="number" name="arrivalTime" min="0"/>
           </td>

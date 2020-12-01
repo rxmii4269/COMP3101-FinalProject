@@ -62,7 +62,6 @@ $(".add-row").click(function () {
                   <td><input class="form-control p-0" type="number" value="${third_val}"></td>
                   <td><input class="form-control p-0" type="number"></td>
                   <td><input class="form-control p-0" type="number"></td>
-                  <td><input class="form-control p-0" type="number"></td>
               </tr>`;
         $("#PS-table").append(third_row);
         third_currValue =  third_val;
@@ -141,10 +140,12 @@ $("#FCFS-btn").click(function () {
   });
   FCFS(groupByThree(readyQueue));
 });
+
 function FCFS(readyQueue) {
   readyQueue.sort((a, b) => a[1] - b[1]);
   replaceChartData(myChart, readyQueue);
 }
+
 
 function groupByThree([a, b, c, ...rest]) {
   if (rest.length === 0) return [[a, b, c].filter((x) => x !== undefined)];
@@ -227,6 +228,57 @@ function performSJN(data) {
 
   return resulting_queue;
 }
+
+$("#PS-btn").click(function () {
+  let readyQueue = [];
+  $("#PS-table tbody tr td").each(function (index, value) {
+    if ($(value).find(".form-control").length) {
+      readyQueue.push($(value).find(".form-control").val());
+    } else {
+      readyQueue.push(value.innerText);
+    }
+  });
+  PS(groupByFour(readyQueue));
+});
+
+function groupByFour([a, b, c, d, ...rest]) {
+  if (rest.length === 0) return [[a, b, c, d].filter((x) => x !== undefined)];
+  return [[a, b, c, d]].concat(groupByFour(rest));
+}
+
+function PS(readyQueue) {
+  readyQueue.sort((a, b) => a[3] - b[3]);
+  readyQueue = performPS(readyQueue);
+  replaceChartData(myChart, readyQueue);
+}
+
+function performPS(data){
+    let current_priority = 0; //shows the current priority in the system
+    let ps_queue = []; //shows the priority in a queue
+    let resulting_queue = [];
+
+    function arrayIsEmpty(arr){
+        return arr.length === undefined || arr.length === 0;
+    }
+
+    while (!arrayIsEmpty(data)) {
+       ps_queue.push(...data.filter( el => el[1] <= current_priority));
+       data =  data.filter(el => el[1] > current_priority);
+       ps_queue.sort((el1, el2) => el1[4]-el2[4]);
+
+       if (arrayIsEmpty(data)) {
+            resulting_queue.push(...ps_queue);
+       }else{
+        resulting_queue.push(ps_queue[0]);
+        current_priority += parseInt(ps_queue[0][3]);
+        ps_queue = ps_queue.filter(el => !(el[0]===ps_queue[0][0]));
+       }
+
+    }
+
+    return resulting_queue;
+}
+
 
 // eslint-disable-next-line no-undef
 var myChart = new Chart(ctx, {
