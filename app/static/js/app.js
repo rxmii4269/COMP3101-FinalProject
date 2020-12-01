@@ -184,7 +184,7 @@ function performSJN(data) {
     }else{
         resulting_queue.push(waiting_queue[0]);
         current_time += parseInt(waiting_queue[0][2]);
-        waiting_queue = waiting_queue.filter(el => el[0]===waiting_queue[0]);
+        waiting_queue = waiting_queue.filter(el => !(el[0]===waiting_queue[0][0]));
     }
   }
 
